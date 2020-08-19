@@ -1,0 +1,27 @@
+{
+  "name": "node_js-basics",
+  "version": "1.0.0",
+  "description": "nodejs basic project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Magdan4ik/NODE_JS.git"
+  },
+  "keywords": [
+    "nodejs",
+    "js"
+  ],
+  "author": "Vladyslav Mahdenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Magdan4ik/NODE_JS/issues"
+  },
+  "homepage": "https://github.com/Magdan4ik/NODE_JS#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
