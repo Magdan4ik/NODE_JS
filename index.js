@@ -11,14 +11,29 @@ const hbs = exphbs.create({
 app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs')
 app.set('views', 'views')
+app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-	res.render('index')
+	res.render('index', {
+		title: 'Главная страница',
+		isHome: true
+	})
 })
 
-app.get('/about', (req, res) => {
-	res.render('about')
+app.get('/courses', (req, res) => {
+	res.render('courses', {
+		title: 'Курсы',
+		isCourses: true
+	})
 })
+
+app.get('/add-course', (req, res) => {
+	res.render('add-course', {
+		title: 'Добавить курс',
+		isAddCourse: true
+	})
+})
+
 
 const PORT = process.env.PORT || 5000
 
