@@ -1,0 +1,33 @@
+{
+  "name": "node_js",
+  "version": "1.0.0",
+  "description": "node js tutorial",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Magdan4ik/NODE_JS.git"
+  },
+  "keywords": [
+    "node",
+    "js",
+    "express"
+  ],
+  "author": "Vladyslav Mahdenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Magdan4ik/NODE_JS/issues"
+  },
+  "homepage": "https://github.com/Magdan4ik/NODE_JS#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
