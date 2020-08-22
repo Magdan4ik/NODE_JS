@@ -11,14 +11,14 @@ const hbs = exphbs.create({
 	extname: 'hbs',
 })
 
-app.use('/', homeRoutes)
-app.use('/add-courses', addRoutes)
-app.use('/courses', coursesRoutes)
-
 app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs')
 app.set('views', 'views')
 app.use(express.static('public'))
+app.use(express.urlencoded({extended: true}))
+app.use('/', homeRoutes)
+app.use('/add-course', addRoutes)
+app.use('/courses', coursesRoutes)
 
 const PORT = process.env.PORT || 5000
 
