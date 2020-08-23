@@ -1,3 +1,13 @@
 /* .nav-wrapper {
 	padding: 0 15px;
 } */
+
+.card .card-image {
+	height: 300px;
+	overflow: hidden;
+}
+.card .card-image img{
+	width: auto;
+	height: 100%;
+	margin: 0 auto
+}
