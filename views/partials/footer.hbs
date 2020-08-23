@@ -1,3 +1,23 @@
-<footer>
-	Footer
+   <footer class="page-footer">
+	<div class="container">
+		<div class="row">
+			<div class="col l6 s12">
+				<h5 class="white-text">iCourses</h5>
+				<p class="grey-text text-lighten-4">Тренировочный проэкт курсов на Node Js.</p>
+			</div>
+			<div class="col l4 offset-l2 s12">
+				<h5 class="white-text">Ccылки</h5>
+				<ul>
+					<li {{#if isHome}} class="active"{{/if}}><a  class="grey-text text-lighten-3" href="/">Главная</a></li>
+					<li {{#if isCourses}} class="active"{{/if}}><a  class="grey-text text-lighten-3" href="/courses">Курсы</a></li>
+					<li {{#if isAddCourse}} class="active"{{/if}}><a  class="grey-text text-lighten-3" href="/add-course">Добавить курс</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="footer-copyright">
+		<div class="container">
+			© 2021 Copyright
+		</div>
+	</div>
 </footer>
