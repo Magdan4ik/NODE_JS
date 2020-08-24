@@ -28,7 +28,7 @@ const PORT = process.env.PORT || 5000
 
 async function start() {
 	try {
-		await mongoose.connect('mongodb+srv://vladyslav:Gy7GIqXa0ElqvUYw@cluster0.9ukjx.mongodb.net/<dbname>?retryWrites=true&w=majority', {
+		await mongoose.connect('mongodb+srv://vladyslav:Gy7GIqXa0ElqvUYw@cluster0.9ukjx.mongodb.net/NodeJS_Shop', {
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
 		})
