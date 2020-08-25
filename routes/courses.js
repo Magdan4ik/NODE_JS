@@ -3,13 +3,20 @@ const CourseModel = require('../models/course');
 const router = Router()
 
 router.get('/', async (req, res) => {
-	const courses = await CourseModel.find().lean() //найти все записи (lean нужен для handlebars)
+	
+	const courses = await CourseModel
+		.find() // .find() найти все записи 
+		.lean() // .lean() возвращает только простые объекты
+		.populate('userId', 'email name')  // populate (связывает модель Пользователя и вставляет данные по ключу userId) + указываем что нужно достать с userId 
+		.select('price title img') //указываем какие поля достать
 
 	res.render('courses', {
 		title: 'Курсы',
 		isCourses: true,
 		courses
 	})
+
+	console.log(courses)
 })
 
 router.get('/:id', async (req, res) => {
