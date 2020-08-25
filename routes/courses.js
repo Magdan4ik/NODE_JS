@@ -1,4 +1,4 @@
-const { Router, json } = require('express')
+const { Router } = require('express')
 const CourseModel = require('../models/course');
 const router = Router()
 
@@ -37,6 +37,16 @@ router.get('/:id/edit', async (req, res) => {
 router.post('/edit', async (req, res) => {
 	await CourseModel.findByIdAndUpdate(req.body.id, req.body).lean()
 	res.redirect('/courses')
+})
+
+router.post('/remove', async (req, res) => {
+	try {
+		await CourseModel.deleteOne({_id: req.body.id})
+		res.redirect('/courses')
+	} catch (error) {
+		console.log(error)
+	}
+
 })
 
 module.exports = router

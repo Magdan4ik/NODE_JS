@@ -8,6 +8,10 @@ body > .main {
 	flex-grow: 1;
 }
 
+.mb2 {
+	margin-bottom: 2rem;
+}
+
 .card .card-image {
 	height: 250px;
 	overflow: hidden;

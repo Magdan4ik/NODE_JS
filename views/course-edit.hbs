@@ -2,7 +2,8 @@
 
 
 <div class="row">
-    <form class="col s12" action="/courses/edit" method="POST">
+  
+    <form class="col s12 mb2" action="/courses/edit" method="POST">
       <div class="row">
         <div class="input-field">
           <input id="title" name="title" type="text" class="validate" value={{course.title}} required>
@@ -23,5 +24,11 @@
 	  <input type="hidden" name="id" value="{{course._id}}">
 	  <button type="submit" class="btn btn-primary">Редактировать курс</button>
     </form>
+
+    <form class="col s12" action="/courses/remove" method="POST">
+      <button class="btn red"> Удалить курс </button>
+      <input type="hidden" name="id" value={{course._id}}>
+    </form>
+
   </div>
-        
+      

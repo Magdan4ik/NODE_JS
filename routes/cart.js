@@ -5,7 +5,7 @@ const CourseModel = require('../models/course')
 const router = Router()
 
 router.post('/add', async (req, res) => {
-	const course = await CourseModel.getById(req.body.id)
+	const course = await CourseModel.findById(req.body.id)
 	await CartModel.add(course)
 	res.redirect('/cart')
 })
