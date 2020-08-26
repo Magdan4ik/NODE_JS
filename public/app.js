@@ -37,7 +37,7 @@ window.cart = {
 						</td>
 					</tr>
 				`
-			}).join()
+			}).join(' ')
 
 			this.container.querySelector('tbody').innerHTML = html
 			this.container.querySelector('.course-price').textContent = toCurrency(cart.price)

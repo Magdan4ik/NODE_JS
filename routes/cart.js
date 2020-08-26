@@ -11,7 +11,18 @@ router.post('/add', async (req, res) => {
 })
 
 router.delete('/remove/:id', async(req, res) => {
-	const cart = await CartModel.remove(req.params.id)
+	await req.user.removeFromCart(req.params.id)
+
+	const user = await req.user
+		.populate('cart.items.courseId')
+		.execPopulate()
+	
+	const courses = CartHelper.mapCartItems(user.cart)
+	const cart = {
+		courses,
+		price: CartHelper.getTotalPrice(courses)
+	}
+
 	res.status(200).json(cart)
 })
 

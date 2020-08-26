@@ -38,12 +38,30 @@ user.methods.addToCart = function(course) {
 
 	// В корзине уже есть такой курс
 	if(idx >= 0) {
-		clonedItems[idx].count = this.cart.items[idx].count++
+		clonedItems[idx].count = this.cart.items[idx].count + 1
 	} else {
 		clonedItems.push({
 			courseId: course._id,
 			count: 1
 		})
+	}
+
+	this.cart = {
+		items: clonedItems
+	}
+
+	return this.save()
+}
+
+user.methods.removeFromCart = function(id) {
+
+	let clonedItems = [...this.cart.items]
+	const idx = clonedItems.findIndex(c => c.courseId.toString() === id.toString())
+
+	if(clonedItems[idx].count === 1) {
+		clonedItems = clonedItems.filter(c => c.courseId.toString() !== id.toString())
+	} else {
+		clonedItems[idx].count--
 	}
 
 	this.cart = {
