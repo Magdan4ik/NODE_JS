@@ -7,6 +7,7 @@ const homeRoutes = require('./routes/home')
 const addRoutes = require('./routes/add-course')
 const coursesRoutes = require('./routes/courses')
 const cartRoutes = require('./routes/cart')
+const ordersRoutes = require('./routes/orders')
 
 const app = express()
 
@@ -33,6 +34,7 @@ app.use('/', homeRoutes)
 app.use('/add-course', addRoutes)
 app.use('/courses', coursesRoutes)
 app.use('/cart', cartRoutes)
+app.use('/orders', ordersRoutes)
 
 const PORT = process.env.PORT || 5000
 

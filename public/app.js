@@ -31,7 +31,7 @@ window.cart = {
 						<td>${c.title}</td>
 						<td>${c.count}</td>
 						<td>
-							<button type="button" class="btn btn-small grey darken-4" onclick="window.cart.removeCourse('${c.id}')">
+							<button type="button" class="btn btn-small grey darken-4" onclick="window.cart.removeCourse('${c._id}')">
 								<i class="material-icons">close</i>
 							</button>
 						</td>

@@ -11,6 +11,9 @@ body > .main {
 .mb2 {
 	margin-bottom: 2rem;
 }
+.mt2{
+	margin-top: 2rem;
+}
 
 .card .card-image {
 	height: 250px;
