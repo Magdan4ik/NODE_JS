@@ -28,4 +28,29 @@ const user = new Schema({
 	}
 })
 
+//Добавляем свой метод
+user.methods.addToCart = function(course) {
+
+	const clonedItems = [...this.cart.items]
+	const idx = clonedItems.findIndex(c => {
+		return c.courseId.toString() === course._id.toString()
+	})
+
+	// В корзине уже есть такой курс
+	if(idx >= 0) {
+		clonedItems[idx].count = this.cart.items[idx].count++
+	} else {
+		clonedItems.push({
+			courseId: course._id,
+			count: 1
+		})
+	}
+
+	this.cart = {
+		items: clonedItems
+	}
+
+	return this.save()
+}
+
 module.exports = model('User', user)

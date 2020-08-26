@@ -16,7 +16,6 @@ router.get('/', async (req, res) => {
 		courses
 	})
 
-	console.log(courses)
 })
 
 router.get('/:id', async (req, res) => {
