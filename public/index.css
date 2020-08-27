@@ -9,10 +9,13 @@ body > .main {
 }
 
 .mb2 {
-	margin-bottom: 2rem;
+	margin-bottom: 2rem !important;;
 }
 .mt2{
-	margin-top: 2rem;
+	margin-top: 2rem !important;;
+}
+.w-100 {
+	width: 100% !important;
 }
 
 .card .card-image {
