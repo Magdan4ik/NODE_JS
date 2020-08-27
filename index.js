@@ -5,6 +5,7 @@ const path = require('path')
 const session = require('express-session')
 const MongoStore = require('connect-mongodb-session')(session)
 const varMiddleware = require('./middlewares/vairables')
+const userMiddleware = require('./middlewares/user')
 const homeRoutes = require('./routes/home')
 const addRoutes = require('./routes/add-course')
 const coursesRoutes = require('./routes/courses')
@@ -38,6 +39,7 @@ app.use(session({
 	store: mongoStore
 }))
 app.use(varMiddleware)
+app.use(userMiddleware)
 
 app.use('/', homeRoutes)
 app.use('/add-course', addRoutes)
