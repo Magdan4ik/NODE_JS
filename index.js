@@ -3,6 +3,7 @@ const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
 const path = require('path')
 const session = require('express-session')
+const MongoStore = require('connect-mongodb-session')(session)
 const varMiddleware = require('./middlewares/vairables')
 const homeRoutes = require('./routes/home')
 const addRoutes = require('./routes/add-course')
@@ -11,7 +12,13 @@ const cartRoutes = require('./routes/cart')
 const ordersRoutes = require('./routes/orders')
 const authRoutes = require('./routes/auth')
 
+const MONGO_DB_URI = 'mongodb+srv://vladyslav:Gy7GIqXa0ElqvUYw@cluster0.9ukjx.mongodb.net/NodeJS_Shop'
 const app = express()
+
+const mongoStore = new MongoStore({
+	collection: 'sessions',
+	uri: MONGO_DB_URI,
+})
 
 const hbs = exphbs.create({
 	defaultLayout: 'main',
@@ -28,6 +35,7 @@ app.use(session({
 	secret: 'secret key',
 	resave: false,
 	saveUninitialized: false,
+	store: mongoStore
 }))
 app.use(varMiddleware)
 
@@ -42,7 +50,7 @@ const PORT = process.env.PORT || 5000
 
 async function start() {
 	try {
-		await mongoose.connect('mongodb+srv://vladyslav:Gy7GIqXa0ElqvUYw@cluster0.9ukjx.mongodb.net/NodeJS_Shop', {
+		await mongoose.connect(MONGO_DB_URI, {
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
 		})
