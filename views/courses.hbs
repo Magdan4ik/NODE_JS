@@ -22,6 +22,7 @@
 					{{#if @root.isAuth}}
 						<form action="/cart/add" method="POST">
 							<input type="hidden" name="id" value="{{_id}}">
+							<input type="hidden" name="_csrf" value="{{@root.csrf}}">
 							<button type="submit" class="btn orange lighten-2 waves-effect waves-light btn-large">
 								<i class="material-icons left">shopping_cart</i> Купить
 							</button>

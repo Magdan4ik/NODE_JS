@@ -16,7 +16,10 @@
 					<td>{{title}}</td>
 					<td>{{count}}</td>
 					<td>
-						<button type="button" class="btn btn-small grey darken-4" onclick="window.cart.removeCourse('{{_id}}')">
+						<button 
+							type="button" 
+							class="btn btn-small grey darken-4" 
+							onclick="window.cart.removeCourse('{{_id}}, {{@root.csrf}}')">
 							  <i class="material-icons">close</i>
 						</button>
 					</td>
@@ -30,6 +33,7 @@
 	</p>
 
 	<form action="/orders/" method="POST" class="mt2">
+		<input type="hidden" name="_csrf" value="{{@root.csrf}}">
 		<button type="submit" class="btn waves-effect waves-light btn-large orange lighten-1">Оформить заказ <i class="material-icons right">send</i></button>
 	</form>
 {{else}}

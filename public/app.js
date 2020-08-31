@@ -28,16 +28,20 @@ window.cart = {
 
 	container: document.getElementById('cart'),
 
-	async removeCourse(id) {
+	async removeCourse(params) {
+		const [id, csrf] = params.split(',')
 		const res = await fetch('/cart/remove/' + id, {
 			method: 'delete',
+			headers: {
+				'X-XSRF-TOKEN': csrf
+			}
 		})
 		const cart = await res.json()
 
-		this.updateHTML(cart)
+		this.updateHTML(cart, csrf)
 	},
 
-	updateHTML(cart) {
+	updateHTML(cart, csrf) {
 		if(cart.courses.length) {
 			const html = cart.courses.map(c => {
 				return `
@@ -45,7 +49,7 @@ window.cart = {
 						<td>${c.title}</td>
 						<td>${c.count}</td>
 						<td>
-							<button type="button" class="btn btn-small grey darken-4" onclick="window.cart.removeCourse('${c._id}')">
+							<button type="button" class="btn btn-small grey darken-4" onclick="window.cart.removeCourse('${c._id}, ${csrf}')">
 								<i class="material-icons">close</i>
 							</button>
 						</td>

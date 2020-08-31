@@ -36,8 +36,6 @@ router.post('/register', async (req, res) => {
 		
 		const { email, password, repeat, name } = req.body
 
-		console.log(req.body)
-
 		const candidate = await UserModel.findOne({email})
 
 		if(candidate) {
