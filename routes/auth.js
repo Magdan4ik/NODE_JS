@@ -1,7 +1,5 @@
 const { Router } = require('express')
-const bcrypt = require('bcryptjs')
 const UserModel = require('../models/user')
-
 
 const router = Router()
 
@@ -14,33 +12,17 @@ router.get('/login', async (req, res) => {
 
 router.post('/login', async (req, res) => {
 
-	try {
-		const { email, password } = req.body
-		const candidate = await UserModel.findOne({email})
-
-		if(candidate) {
-
-			const validPass = await bcrypt.compare(password, candidate.password)
-			
-			if(validPass) {
-				req.session.user = candidate
-				req.session.isAuthenticated = true
-				req.session.save(err => {
-					if(err) {
-						throw err
-					} else {
-						res.redirect('/')
-					}
-				})
-			} else {
-				res.redirect('/auth/login#login')
-			}
+	const user = await UserModel.findById('5f4544ab008f748f1a87e6ad')
+	
+	req.session.user = user
+	req.session.isAuthenticated = true
+	req.session.save(err => {
+		if(err) {
+			throw err
 		} else {
-			res.redirect('/auth/login#login')
+			res.redirect('/')
 		}
-	} catch (error) {
-		console.log(error)
-	}
+	})
 })
 
 router.get('/logout', async (req, res) => {
@@ -52,22 +34,19 @@ router.get('/logout', async (req, res) => {
 router.post('/register', async (req, res) => {
 	try {
 		
-		const { email, password, repassword, name } = req.body
+		const { email, password, repeat, name } = req.body
 
-		if(password !== repassword) {
-			res.redirect('/auth/login#register')
-		}
+		console.log(req.body)
 
 		const candidate = await UserModel.findOne({email})
 
 		if(candidate) {
 			res.redirect('/auth/login#register')
 		} else {
-			const hashPass = await bcrypt.hash(password, 10)
 			const user = new UserModel({
 				email,
 				name,
-				password: hashPass,
+				password,
 				cart: {
 					items: []
 				}
