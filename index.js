@@ -2,6 +2,7 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
 const csrf = require('csurf')
+const flash = require('connect-flash')
 const path = require('path')
 const session = require('express-session')
 const MongoStore = require('connect-mongodb-session')(session)
@@ -40,6 +41,7 @@ app.use(session({
 	store: mongoStore
 }))
 app.use(csrf()) //csrf защита
+app.use(flash()) //сообщения об ошибках
 app.use(varMiddleware)
 app.use(userMiddleware)
 

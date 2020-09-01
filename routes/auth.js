@@ -1,5 +1,6 @@
 const { Router } = require('express')
 const UserModel = require('../models/user')
+const bcrypt = require('bcryptjs')
 
 const router = Router()
 
@@ -7,22 +8,39 @@ router.get('/login', async (req, res) => {
 	res.render('auth/login', {
 		title: 'Авторизация',
 		isLogin: true,
+		loginError: req.flash('loginError'),
+		registerError: req.flash('registerError'),
 	})
 })
 
 router.post('/login', async (req, res) => {
+	try {
+		const { email, password } = req.body
+		const candidate = await UserModel.findOne({ email })
 
-	const user = await UserModel.findById('5f4544ab008f748f1a87e6ad')
-	
-	req.session.user = user
-	req.session.isAuthenticated = true
-	req.session.save(err => {
-		if(err) {
-			throw err
+		if (candidate) {
+			const validPass = await bcrypt.compare(password, candidate.password)
+
+			if (validPass) {
+				req.session.user = candidate
+				req.session.isAuthenticated = true
+				req.session.save(err => {
+					if (err) {
+						throw err
+					}
+					res.redirect('/')
+				})
+			} else {
+				req.flash('loginError', 'Неверный пароль')
+				res.redirect('/auth/login#login')
+			}
 		} else {
-			res.redirect('/')
+			req.flash('loginError', 'Такого пользователя не существует')
+			res.redirect('/auth/login#login')
 		}
-	})
+	} catch (error) {
+		console.log(error)
+	}
 })
 
 router.get('/logout', async (req, res) => {
@@ -33,18 +51,18 @@ router.get('/logout', async (req, res) => {
 
 router.post('/register', async (req, res) => {
 	try {
-		
-		const { email, password, repeat, name } = req.body
-
+		const { email, password, name } = req.body
 		const candidate = await UserModel.findOne({email})
 
 		if(candidate) {
+			req.flash('registerError', 'Пользователь с таким email уже существует')
 			res.redirect('/auth/login#register')
 		} else {
+			const hashPass = await bcrypt.hash(password, 10)
 			const user = new UserModel({
 				email,
 				name,
-				password,
+				password: hashPass,
 				cart: {
 					items: []
 				}

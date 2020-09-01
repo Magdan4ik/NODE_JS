@@ -59,3 +59,12 @@ body > .main {
 .course-price {
 	font-size: 2.5rem;
 }
+
+.alert {
+	background: rgba(255, 0, 0, 0.3);
+	padding: 15px;
+	margin: 2rem 0;
+	border-radius: 10px;
+	text-align: center;
+	color: #ca000a
+}
