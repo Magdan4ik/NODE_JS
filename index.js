@@ -6,6 +6,7 @@ const flash = require('connect-flash')
 const path = require('path')
 const session = require('express-session')
 const MongoStore = require('connect-mongodb-session')(session)
+const keys = require('./keys')
 const varMiddleware = require('./middlewares/vairables')
 const userMiddleware = require('./middlewares/user')
 const homeRoutes = require('./routes/home')
@@ -15,12 +16,12 @@ const cartRoutes = require('./routes/cart')
 const ordersRoutes = require('./routes/orders')
 const authRoutes = require('./routes/auth')
 
-const MONGO_DB_URI = 'mongodb+srv://vladyslav:Gy7GIqXa0ElqvUYw@cluster0.9ukjx.mongodb.net/NodeJS_Shop'
+
 const app = express()
 
 const mongoStore = new MongoStore({
 	collection: 'sessions',
-	uri: MONGO_DB_URI,
+	uri: keys.MONGO_DB_URI,
 })
 
 const hbs = exphbs.create({
@@ -35,7 +36,7 @@ app.set('views', 'views')
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({extended: true}))
 app.use(session({
-	secret: 'secret key',
+	secret: keys.SESSION_SECRET,
 	resave: false,
 	saveUninitialized: false,
 	store: mongoStore
@@ -56,7 +57,7 @@ const PORT = process.env.PORT || 5000
 
 async function start() {
 	try {
-		await mongoose.connect(MONGO_DB_URI, {
+		await mongoose.connect(keys.MONGO_DB_URI, {
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
 		})
