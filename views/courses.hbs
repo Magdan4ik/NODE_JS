@@ -8,9 +8,11 @@
 				<div class="card-image">
 					<img src="{{img}}" alt={{title}}>
 					{{#if @root.isAuth}}
-						<div class="card-edit">
-							<a href="/courses/{{_id}}/edit?allow=true" target="_blank"><i class="material-icons">edit</i></a>
-						</div>
+						{{#ifEquals userId._id @root.userId}}
+							<div class="card-edit">
+								<a href="/courses/{{_id}}/edit?allow=true" target="_blank"><i class="material-icons">edit</i></a>
+							</div>
+						{{/ifEquals }}
 					{{/if}}
 				</div>
 				<div class="card-content">
