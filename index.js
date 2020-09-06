@@ -16,6 +16,7 @@ const coursesRoutes = require('./routes/courses')
 const cartRoutes = require('./routes/cart')
 const ordersRoutes = require('./routes/orders')
 const authRoutes = require('./routes/auth')
+const profileRoutes = require('./routes/profile')
 
 
 const app = express()
@@ -54,7 +55,8 @@ app.use('/courses', coursesRoutes)
 app.use('/cart', cartRoutes)
 app.use('/orders', ordersRoutes)
 app.use('/auth', authRoutes)
-app.use(notFoundMiddleware)
+app.use('/profile', profileRoutes)
+app.use(notFoundMiddleware) //404 - вконце всех
 
 const PORT = process.env.PORT || 5000
 

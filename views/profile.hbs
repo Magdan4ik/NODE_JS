@@ -1,0 +1,33 @@
+<h1>Профиль</h1>
+
+<div class="row">
+	<div class="col s6 m4">
+		<img 
+			class="avatar"
+			src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/User_icon-cp.svg/1200px-User_icon-cp.svg.png" 
+			alt="">
+		<p>Аватара нет</p>
+	</div>
+	<div class="col s6 m4">
+		<form action="/profile" method="POST">
+			<p>Ваш email: <b>{{user.email}}</b></p>
+			<div class="input-field">
+				<input id="name" name="name" type="text" class="validate" value="{{user.name}}" required>
+				<label for="name">Ваше имя</label>
+				<span class="helper-text" data-error="Введите имя"></span>
+			</div>
+			
+			<div class="file-field input-field">
+				<div class="btn">
+					<span>Аватар</span>
+					<input type="file" name="avatar">
+				</div>
+				<div class="file-path-wrapper">
+					<input class="file-path validate" type="text">
+				</div>
+			</div>
+			<input type="hidden" name="_csrf" value="{{@root.csrf}}">
+			<button type="submit" class="btn btn-primary">Изменить</button>
+		</form>
+	</div>
+</div>

@@ -68,3 +68,8 @@ body > .main {
 	text-align: center;
 	color: #ca000a
 }
+
+.avatar {
+	max-width: 300px;
+	height: auto;
+}
