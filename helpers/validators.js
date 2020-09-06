@@ -1,4 +1,4 @@
-const { body } = require('express-validator/check')
+const { body } = require('express-validator')
 const UserModel = require('../models/user')
 
 exports.registerValidators = [
@@ -31,4 +31,14 @@ exports.registerValidators = [
 			return true
 		})
 		.trim()
+]
+
+exports.courseValidators = [
+	body('title', 'Минимальная длина названия - 3 символа')
+		.isLength({min: 3})
+		.trim(),
+	body('price', 'Введите корректную цену')
+		.isNumeric(),
+	body('img', 'Введите корректный url картинки')
+		.isURL()
 ]

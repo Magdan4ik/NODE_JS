@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const { validationResult } = require('express-validator/check')
+const { validationResult } = require('express-validator')
 const { registerValidators } = require('../helpers/validators')
 const UserModel = require('../models/user')
 const keys = require('../keys')
