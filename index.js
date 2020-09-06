@@ -9,6 +9,7 @@ const MongoStore = require('connect-mongodb-session')(session)
 const keys = require('./keys')
 const varMiddleware = require('./middlewares/vairables')
 const userMiddleware = require('./middlewares/user')
+const notFoundMiddleware = require('./middlewares/notFound')
 const homeRoutes = require('./routes/home')
 const addRoutes = require('./routes/add-course')
 const coursesRoutes = require('./routes/courses')
@@ -53,6 +54,7 @@ app.use('/courses', coursesRoutes)
 app.use('/cart', cartRoutes)
 app.use('/orders', ordersRoutes)
 app.use('/auth', authRoutes)
+app.use(notFoundMiddleware)
 
 const PORT = process.env.PORT || 5000
 
