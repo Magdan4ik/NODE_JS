@@ -2,14 +2,20 @@
 
 <div class="row">
 	<div class="col s6 m4">
-		<img 
+		{{#if user.avatarUrl}}
+			<img 
+			class="avatar"
+			src="/{{user.avatarUrl}}" 
+			alt="avatar-{{user.name}}">
+		{{else}}
+			<img 
 			class="avatar"
 			src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/User_icon-cp.svg/1200px-User_icon-cp.svg.png" 
-			alt="">
-		<p>Аватара нет</p>
+			alt="No Avatar">
+		{{/if}}
 	</div>
 	<div class="col s6 m4">
-		<form action="/profile" method="POST">
+		<form action="/profile" method="POST" enctype="multipart/form-data">
 			<p>Ваш email: <b>{{user.email}}</b></p>
 			<div class="input-field">
 				<input id="name" name="name" type="text" class="validate" value="{{user.name}}" required>
