@@ -6,6 +6,8 @@ const flash = require('connect-flash')
 const path = require('path')
 const session = require('express-session')
 const MongoStore = require('connect-mongodb-session')(session)
+const helmet = require('helmet')
+const compression = require('compression')
 const keys = require('./keys')
 const varMiddleware = require('./middlewares/vairables')
 const userMiddleware = require('./middlewares/user')
@@ -49,6 +51,8 @@ app.use(session({
 app.use(fileMiddleware.single('avatar'))
 app.use(csrf()) //csrf защита
 app.use(flash()) //сообщения об ошибках
+app.use(helmet()) // добавление хедеров
+app.use(compression()) //сжатие статических файлов
 app.use(varMiddleware)
 app.use(userMiddleware)
 
