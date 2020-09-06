@@ -9,6 +9,7 @@ const MongoStore = require('connect-mongodb-session')(session)
 const keys = require('./keys')
 const varMiddleware = require('./middlewares/vairables')
 const userMiddleware = require('./middlewares/user')
+const fileMiddleware = require('./middlewares/file')
 const notFoundMiddleware = require('./middlewares/notFound')
 const homeRoutes = require('./routes/home')
 const addRoutes = require('./routes/add-course')
@@ -44,6 +45,7 @@ app.use(session({
 	saveUninitialized: false,
 	store: mongoStore
 }))
+app.use(fileMiddleware.single('avatar'))
 app.use(csrf()) //csrf защита
 app.use(flash()) //сообщения об ошибках
 app.use(varMiddleware)
