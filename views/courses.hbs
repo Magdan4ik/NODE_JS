@@ -1,0 +1,41 @@
+<h1>{{title}}</h1>
+
+{{#if courses.length}}
+<div class="row">
+	{{#each courses}}
+		<div class="col m12 l6 xl4">
+			<div class="card ">
+				<div class="card-image">
+					<img src="{{img}}" alt={{title}}>
+					{{#if @root.isAuth}}
+						{{#ifEquals userId._id @root.userId}}
+							<div class="card-edit">
+								<a href="/courses/{{_id}}/edit?allow=true" target="_blank"><i class="material-icons">edit</i></a>
+							</div>
+						{{/ifEquals }}
+					{{/if}}
+				</div>
+				<div class="card-content">
+					<span class="card-title">{{title}}</span>
+					<p class="card-price">{{price}}</p>
+				</div>
+				<div class="card-action inline">
+					<a href="/courses/{{_id}}" target="_blank">Открыть курс</a>
+					{{#if @root.isAuth}}
+						<form action="/cart/add" method="POST">
+							<input type="hidden" name="id" value="{{_id}}">
+							<input type="hidden" name="_csrf" value="{{@root.csrf}}">
+							<button type="submit" class="btn orange lighten-2 waves-effect waves-light btn-large">
+								<i class="material-icons left">shopping_cart</i> Купить
+							</button>
+						</form>
+					{{/if}}
+					
+				</div>
+			</div>
+		</div>
+	{{/each}}
+</div>
+{{else}}
+<p>Курсов пока нет</p>
+{{/if}}
