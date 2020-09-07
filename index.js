@@ -51,7 +51,9 @@ app.use(session({
 app.use(fileMiddleware.single('avatar'))
 app.use(csrf()) //csrf защита
 app.use(flash()) //сообщения об ошибках
-app.use(helmet()) // добавление хедеров
+app.use(helmet({
+	contentSecurityPolicy: false
+})) // добавление хедеров
 app.use(compression()) //сжатие статических файлов
 app.use(varMiddleware)
 app.use(userMiddleware)
